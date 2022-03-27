@@ -15,7 +15,7 @@ class CampaignShow extends Component {
         //console.log(summary); *Para ver as informações no console
 
         return {
-            address: props.query.address, 
+            address: props.query.address,
             minimumContribution: summary[0], //zero, pq é a primeira informação do summary
             balance: summary[1],
             requestsCount: summary[2],
@@ -70,40 +70,40 @@ class CampaignShow extends Component {
     }
 
     render() {
-        
-        return (
-        <>
-        <Link route={`/`}>
-        <a>
-            <Button secondary labelPosition='left' icon='left chevron' content='Voltar' />
-        </a>
-        </Link>
-        
-        <Header as='h3' block style={{marginBottom: "50px"}}>
-        Detalhes da Campanha
-        </Header>
 
-        <Grid>
-            <Grid.Row>
-                <Grid.Column width={10}>
-                    {this.renderCards()}
-                </Grid.Column>
-            
-                <Grid.Column width={6}>
-                    <ContributeForm address={this.props.address} />
-                </Grid.Column>
-            </Grid.Row>
-            <Grid.Row>
-                <Grid.Column>
-                    <Link route={`/campanhas/${this.props.address}/gastos`}>
-                        <a>
-                            <Button primary>Ver solicitações de gastos</Button>
-                        </a>
-                    </Link>
-                </Grid.Column>
-            </Grid.Row>
-        </Grid>
-        </>
+        return (
+            <>
+                <Link route={`/`}>
+                    <a>
+                        <Button secondary labelPosition='left' icon='left chevron' content='Voltar' />
+                    </a>
+                </Link>
+
+                <Header as='h3' block style={{ marginBottom: "50px" }}>
+                    Detalhes da Campanha
+                </Header>
+
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column width={10}>
+                            {this.renderCards()}
+                        </Grid.Column>
+
+                        <Grid.Column width={6}>
+                            <ContributeForm address={this.props.address} />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Link route={`/campanhas/${this.props.address}/gastos`}>
+                                <a>
+                                    <Button primary>Ver solicitações de gastos</Button>
+                                </a>
+                            </Link>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
+            </>
         );
     }
 }

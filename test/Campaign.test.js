@@ -17,7 +17,7 @@ beforeEach(async () => {
 
     factory = await new web3.eth.Contract(JSON.parse(compiledFactory.interface))
         .deploy({ data: compiledFactory.bytecode })
-        .send ({ from: accounts[0], gas: '1000000' });
+        .send({ from: accounts[0], gas: '1000000' });
 
     await factory.methods.createCampaign('100').send({
         from: accounts[0],
@@ -45,15 +45,15 @@ describe('Campaigns', () => {
 
     it("permite as pessoas contribuírem e as marca como approvers", async () => {
         await campaign.methods.contribute().send({
-        value: "200",
-        from: accounts[1],
+            value: "200",
+            from: accounts[1],
         });
         const isContributor = await campaign.methods.approvers(accounts[1]).call();
         assert(isContributor);
     });
 
     it("exige um mínimo de contribuição", async () => {
-        try{
+        try {
             await campaign.methods.contribute().send({
                 value: "5",
                 from: accounts[1],
@@ -76,38 +76,38 @@ describe('Campaigns', () => {
 
     it("processa a solicitação", async () => {
         await campaign.methods.contribute().send({
-          from: accounts[0],
-          value: web3.utils.toWei("10", "ether"),
+            from: accounts[0],
+            value: web3.utils.toWei("10", "ether"),
         });
-    
+
         await campaign.methods
-          .createRequest("A", web3.utils.toWei("5", "ether"), accounts[1])
-          .send({ from: accounts[0], gas: "1000000" });
-    
+            .createRequest("A", web3.utils.toWei("5", "ether"), accounts[1])
+            .send({ from: accounts[0], gas: "1000000" });
+
         await campaign.methods.approveRequest(0).send({
-          from: accounts[0],
-          gas: "1000000",
+            from: accounts[0],
+            gas: "1000000",
         });
-    
+
         await campaign.methods.finalizeRequest(0).send({
-          from: accounts[0],
-          gas: "1000000",
+            from: accounts[0],
+            gas: "1000000",
         });
-    
+
         let balance = await web3.eth.getBalance(accounts[1]);
         balance = web3.utils.fromWei(balance, "ether");
         balance = parseFloat(balance);
         console.log(balance);
         assert(balance > 104);
-      });
+    });
 
-      it('O teste garantiu que apenas o Gerente poderá solicitar autorização de gastos', async () => {
+    it('O teste garantiu que apenas o Gerente poderá solicitar autorização de gastos', async () => {
         try {
             await campaign.methods.createRequest().send({
-            from:accounts[1] //somente a conta 0 poderá solicitar autorização, por isso o resultado deve ser "falso"
+                from: accounts[1] //somente a conta 0 poderá solicitar autorização, por isso o resultado deve ser "falso"
             });
             assert(false);
-        } catch (err){
+        } catch (err) {
             assert(err);
         }
     });
@@ -115,10 +115,10 @@ describe('Campaigns', () => {
     it('O teste verificou que apenas o Gerente poderá finalizar a solicitação', async () => {
         try {
             await campaign.methods.finalizeRequest().send({
-            from:accounts[1] 
+                from: accounts[1]
             });
             assert(false);
-        } catch (err){
+        } catch (err) {
             assert(err);
         }
     });

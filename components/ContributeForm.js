@@ -14,7 +14,7 @@ class ContributeForm extends Component {
     onSubmit = async (event) => {
         event.preventDefault();
 
-        this.setState({loading: true, errorMessage:''});
+        this.setState({ loading: true, errorMessage: '' });
 
         const campaign = Campaign(this.props.address);
 
@@ -24,12 +24,12 @@ class ContributeForm extends Component {
                 from: accounts[0],
                 value: web3.utils.toWei(this.state.value, 'ether')
             });
-            Router.replaceRoute(`/campanhas/${this.props.address}`) //atualiza a página após a contribuição
+            Router.replaceRoute(`/campanhas/${this.props.address}`); //atualiza a página após a contribuição
         } catch (err) {
-            this.setState({ errorMessage: err.message});
+            this.setState({ errorMessage: err.message });
         }
-            this.setState({loading: false, value: ''});
-            
+        this.setState({ loading: false, value: '' });
+
     };
 
     render() {

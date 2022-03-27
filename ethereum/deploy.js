@@ -1,12 +1,13 @@
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const Web3 = require('web3');
 const compiledFactory = require('./build/CampaignFactory.json');
+require('dotenv').config();
 
 //const { interface, bytecode } = require('./compile');
 
 const provider = new HDWalletProvider(
-  'churn fan churn height decline pigeon adult toddler custom cruise expand age',
-  'https://rinkeby.infura.io/v3/b6d82d0e191e41c992e81d4218212a3e'
+  process.env.SECRET_WORDS,
+  process.env.INFURA_LINK
 );
 const web3 = new Web3(provider);
 

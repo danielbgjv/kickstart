@@ -7,7 +7,7 @@ export default props => {
         <Container>
             <Header />
             {props.children}
-           
+
         </Container>
-    )
-}
+    );
+};

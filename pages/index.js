@@ -11,45 +11,45 @@ class CampaignIndex extends Component {
         return { campaigns };
     }
 
-      renderCampaigns() {
-       const items = this.props.campaigns.map(address => {
-           return {
-            header: address,
-            description: (
-            <Link route={`/campanhas/${address}`}>
-                <a>Ver Campanha</a>
-            </Link>
-            ),
-            fluid: true
+    renderCampaigns() {
+        const items = this.props.campaigns.map(address => {
+            return {
+                header: address,
+                description: (
+                    <Link route={`/campanhas/${address}`}>
+                        <a>Ver Campanha</a>
+                    </Link>
+                ),
+                fluid: true
 
-           };
-       });
+            };
+        });
 
-       return <Card.Group items={items} />;
+        return <Card.Group items={items} />;
     }
-    
+
 
     render() {
         return <div>
-            <Header as='h3' block style={{marginTop: "50px"}}>
-            Campanhas Abertas
+            <Header as='h3' block style={{ marginTop: "50px" }}>
+                Campanhas Abertas
             </Header>
-            
+
             <Link route='/campanhas/nova'>
                 <a>
                     <Button
-                    floated='right' 
-                    content='Criar Campanha' 
-                    icon='add circle'
-                    primary
+                        floated='right'
+                        content='Criar Campanha'
+                        icon='add circle'
+                        primary
                     />
                 </a>
             </Link>
             {this.renderCampaigns()}
-            
-           
+
+
         </div>;
-       
+
     }
 }
 
